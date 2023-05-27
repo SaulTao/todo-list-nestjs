@@ -20,11 +20,13 @@ export class TaskService {
   ];
 
   create(createTaskDto: CreateTaskDto) {
-    this._tasks.push({
+    const task = {
       id: (this._tasks[this._tasks.length - 1]?.id ?? 0) + 1,
       ...createTaskDto,
       isChecked: false,
-    });
+    };
+    this._tasks.push(task);
+    return task;
   }
 
   findAll(): Task[] {
@@ -54,6 +56,7 @@ export class TaskService {
         item = task;
       }
     });
+    return task;
   }
 
   remove(id: number) {
